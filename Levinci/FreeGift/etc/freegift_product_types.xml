@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Levinci_FreeGift:etc/freegift_product_types.xsd">
+    <type name="simple" label="Simple Product" modelInstance="Levinci\FreeGift\Model\FreeGift\ProductTypes\SimpleProduct" sortOrder="10" />
+<!--    <type name="configurable" label="Configurable Product" modelInstance="Levinci\FreeGift\Model\FreeGift\ProductTypes\ConfigurableProduct" composite='true' sortOrder="20"/>-->
+</config>

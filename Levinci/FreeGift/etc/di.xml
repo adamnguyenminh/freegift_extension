@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Levinci\FreeGift\Model\FreeGift\ProductTypes\Config\Reader" type="Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="converter" xsi:type="object">Levinci\FreeGift\Model\FreeGift\ProductTypes\Config\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">Levinci\FreeGift\Model\FreeGift\ProductTypes\Config\SchemaLocator</argument>
+            <argument name="fileName" xsi:type="string">freegift_product_types.xml</argument>
+        </arguments>
+    </virtualType>
+    <type name="Levinci\FreeGift\Model\FreeGift\ProductTypes\Config">
+        <arguments>
+            <argument name="reader" xsi:type="object">Levinci\FreeGift\Model\FreeGift\ProductTypes\Config\Reader</argument>
+            <argument name="cacheId" xsi:type="string">freegift_product_types_config</argument>
+        </arguments>
+    </type>
+</config>

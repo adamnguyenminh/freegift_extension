@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="type" type="typeDeclaration" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+        </xs:complexType>
+        <xs:unique name="uniqueTypeName">
+            <xs:annotation>
+                <xs:documentation>
+                    Product type name must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="type" />
+            <xs:field xpath="@name" />
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="allowedSelectionTypeDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Allowed selection type declaration.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="allowedSelectionTypesDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Allowed selection types declaration.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="type" type="allowedSelectionTypeDeclaration" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="modelName">
+        <xs:annotation>
+            <xs:documentation>
+                Model name can contain only ([\\]?[a-zA-Z_][a-zA-Z0-9_]*)+.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([\\]?[a-zA-Z_][a-zA-Z0-9_]*)+" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="typeDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Product type declaration.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:all minOccurs="0">
+            <xs:element name="allowedSelectionTypes" type="allowedSelectionTypesDeclaration" minOccurs="0">
+                <xs:unique name="uniqueAllowedSelectionTypeName">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Allowed selection type name must be unique.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:selector xpath="type" />
+                    <xs:field xpath="@name" />
+                </xs:unique>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="label" type="xs:string" use="optional" />
+        <xs:attribute name="modelInstance" type="modelName" use="optional" />
+        <xs:attribute name="composite" type="xs:boolean" use="optional" />
+        <xs:attribute name="canUseQtyDecimals" type="xs:boolean" use="optional" />
+        <xs:attribute name="isQty" type="xs:boolean" use="optional" />
+        <xs:attribute name="sortOrder" type="xs:integer" use="optional" />
+    </xs:complexType>
+</xs:schema>
